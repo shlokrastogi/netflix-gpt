@@ -1,8 +1,8 @@
 import React from "react";
-import "./App.css";
+import Body from "../src/components/Body";
 
 function App() {
-  return <div className="text-3xl">Let's Build Netflix-GPT</div>;
+  return <Body />;
 }
 
 export default App;
