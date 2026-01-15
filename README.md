@@ -5,7 +5,10 @@
 
 # Features
 
-- Login/ Sign Up
+- Login
+
+  - Sign In
+  - Sign In
 
   - Sign In/ Sign Up form
   - redirect to Browse Page
