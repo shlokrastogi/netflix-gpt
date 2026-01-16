@@ -7,6 +7,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignInForm, setIsSignInForm] = useState(true);
 
+  const fullName = useRef<HTMLInputElement>(null);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
 
@@ -15,10 +16,17 @@ const Login = () => {
   const handleButtonClick = () => {
     if (!email.current || !password.current) return;
 
+    const fullNameValue = fullName.current?.value;
     const emailValue = email.current.value;
     const passwordValue = password.current.value;
 
-    const message: string | null = checkValidData(emailValue, passwordValue);
+    const message = checkValidData({
+      fullName: fullNameValue,
+      email: emailValue,
+      password: passwordValue,
+      isSignUp: !isSignInForm,
+    });
+
     setErrorMessage(message || "");
   };
 
@@ -55,6 +63,7 @@ const Login = () => {
 
             {!isSignInForm && (
               <input
+                ref={fullName}
                 type="text"
                 placeholder="Full Name"
                 required
@@ -66,6 +75,7 @@ const Login = () => {
               ref={email}
               type="email"
               placeholder="Email Address"
+              autoComplete="email"
               className="w-72 p-2 mb-4 bg-gray-800 text-white rounded"
             />
 
@@ -74,6 +84,7 @@ const Login = () => {
                 ref={password}
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
+                autoComplete="password"
                 className="w-full p-2 bg-gray-800 text-white rounded pr-10"
               />
 
