@@ -1,14 +1,30 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import Header from "./header";
-import { spawn } from "child_process";
+import checkValidData from "../utils/validData";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignInForm, setIsSignInForm] = useState(true);
 
+  const email = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleButtonClick = () => {
+    if (!email.current || !password.current) return;
+
+    const emailValue = email.current.value;
+    const passwordValue = password.current.value;
+
+    const message: string | null = checkValidData(emailValue, passwordValue);
+    setErrorMessage(message || "");
+  };
+
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
+    setErrorMessage("");
   };
 
   return (
@@ -29,7 +45,10 @@ const Login = () => {
 
         {/* Remaining space container */}
         <div className="flex flex-1  items-center justify-center">
-          <form className="flex flex-col bg-black/70 p-8 rounded-lg">
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="flex flex-col bg-black/70 p-8 rounded-lg"
+          >
             <h1 className="text-3xl text-white mb-6 font-bold">
               {isSignInForm ? "Sign In" : "Sign Up"}
             </h1>
@@ -44,17 +63,17 @@ const Login = () => {
             )}
 
             <input
+              ref={email}
               type="email"
               placeholder="Email Address"
-              required
               className="w-72 p-2 mb-4 bg-gray-800 text-white rounded"
             />
 
-            <div className="relative w-72 mb-8">
+            <div className="relative w-72 mb-4">
               <input
+                ref={password}
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
-                required
                 className="w-full p-2 bg-gray-800 text-white rounded pr-10"
               />
 
@@ -70,7 +89,15 @@ const Login = () => {
               </span>
             </div>
 
-            <button className="bg-red-600 text-white w-72 p-2 rounded font-semibold">
+            {errorMessage && (
+              <p className="text-red-500 w-72 text-sm">{errorMessage}</p>
+            )}
+
+            <button
+              type="submit"
+              className="bg-red-600 text-white w-72 p-2 mt-4 rounded font-semibold"
+              onClick={handleButtonClick}
+            >
               {isSignInForm ? "Sign In" : "Sign Up"}
             </button>
 
