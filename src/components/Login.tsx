@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import Header from "./header";
 import checkValidData from "../utils/validData";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,6 +30,24 @@ const Login = () => {
     });
 
     setErrorMessage(message || "");
+
+    if (!isSignInForm) {
+      //Sign Up Logic
+      createUserWithEmailAndPassword(auth, emailValue, passwordValue)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    } else {
+      //Sign In Logic
+    }
   };
 
   const toggleSignInForm = () => {
