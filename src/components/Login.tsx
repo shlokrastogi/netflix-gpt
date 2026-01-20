@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import Header from "./header";
 import checkValidData from "../utils/validData";
 import {
   createUserWithEmailAndPassword,
@@ -48,7 +47,15 @@ const Login = () => {
 
         await updateProfile(userCredential.user, {
           displayName: fullNameValue,
+          photoURL: fullNameValue
+            ?.split(" ")
+            .map((n) => n[0])
+            .join("")
+            .toUpperCase(),
         });
+
+        // Force Firebase to refresh the user session
+        await userCredential.user.reload();
 
         navigate("/browse");
       } else {

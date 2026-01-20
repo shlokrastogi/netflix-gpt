@@ -1,19 +1,18 @@
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
+import UserAvatar from "../utils/userAvatar";
 
 const Header = () => {
   const navigate = useNavigate();
+  const user = useSelector((store: any) => store.user);
 
   const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        navigate("/");
-      })
-      .catch((error) => {
-        // An error happened.
-      });
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      navigate("/");
+    });
   };
 
   return (
@@ -24,11 +23,8 @@ const Header = () => {
         alt="Netflix"
       />
       <div className="flex h-12">
-        <img
-          className="rounded-xl"
-          src="https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXz4LMjJFidX8MxhZ6qro8PBTjmHbxlaLAbk45W1DXbKsAIOwyHQPiMAuUnF1G24CLi7InJHK4Ge4jkXul1xIW49Dr5S7fc.png?r=e6e"
-          alt="userIcon"
-        />
+        <UserAvatar />
+
         <button
           onClick={handleSignOut}
           className="flex text-white bg-red-600 rounded ml-4 my-1 p-2"
