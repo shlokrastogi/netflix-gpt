@@ -8,12 +8,15 @@
 - Sign Up Form
 - Form Validation
 - useRef Hook
-- Create Sign In user account
+- Firebase Setup
+- Deploying our app to production
+- Create Sign Up user account
+- Implement Sign In User Api
+- Created Redux Store with userSlice
 
 # Features
 
 - Login
-
   - Sign In
   - Sign In
 
@@ -21,7 +24,6 @@
   - redirect to Browse Page
 
 - Browse (after Authentication)
-
   - Header
   - Main Movie
     - Trailer in Background
