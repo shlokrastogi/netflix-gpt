@@ -13,6 +13,8 @@
 - Create Sign Up user account
 - Implement Sign In User Api
 - Created Redux Store with userSlice
+- Update Profile
+- Bug Fix of redirectingdirctly through URL
 
 # Features
 

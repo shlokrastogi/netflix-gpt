@@ -7,7 +7,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+import Header from "./header";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,7 +17,6 @@ const Login = () => {
   const fullName = useRef<HTMLInputElement>(null);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
 
   const handleButtonClick = async () => {
     if (!email.current || !password.current) return;
@@ -53,15 +52,9 @@ const Login = () => {
             .join("")
             .toUpperCase(),
         });
-
-        // Force Firebase to refresh the user session
-        await userCredential.user.reload();
-
-        navigate("/browse");
       } else {
         // SIGN IN
         await signInWithEmailAndPassword(auth, emailValue, passwordValue);
-        navigate("/browse");
       }
     } catch (error: any) {
       setErrorMessage(error.code + " - " + error.message);
@@ -84,13 +77,7 @@ const Login = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black"></div>
 
       <div className="relative z-10 flex flex-col min-h-screen">
-        <div>
-          <img
-            className="absolute w-32 top-4 left-28"
-            src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
-            alt="Netflix"
-          />
-        </div>
+        <Header />
 
         <div className="flex flex-1 items-center justify-center">
           <form
