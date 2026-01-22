@@ -15,6 +15,17 @@
 - Created Redux Store with userSlice
 - Update Profile
 - Bug Fix of redirectingdirctly through URL
+- Unsuscribe to the onAuthStateChange callback
+- Added hardcoaded values to the constants file
+- Register for TMDB website and create an app and get access token
+- Get Data from TMDB now playing movies list API.
+- Created the custom Hook for the now playing movies.
+- Update Store with Movies Data
+- Planning for Main Container & secondary conatiner
+- Fetch data for Trailer videos
+- Update store with Trailer Video Data
+- Embedded the YouTube video and make it autoplay and mute
+- Tailwind Classes to make Main Container look Awesome
 
 # Features
 

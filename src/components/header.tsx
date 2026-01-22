@@ -6,6 +6,7 @@ import UserAvatar from "../utils/userAvatar";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "../utils/userSlice";
+import { LOGO } from "../utils/constants";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Header = () => {
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsuscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
@@ -41,22 +42,21 @@ const Header = () => {
         navigate("/");
       }
     });
+
+    // Unsuscribe when my components unmount
+    return () => unsuscribe();
   }, []);
 
   return (
-    <div className="flex flex-row absolute w-screen px-28 py-4 bg-gradient-to-b from-black z-10 justify-between">
-      <img
-        className="flex w-32"
-        src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
-        alt="Netflix"
-      />
+    <div className="z-20 flex flex-row absolute w-screen px-28 py-4 bg-gradient-to-b from-black justify-between">
+      <img className="flex w-32" src={LOGO} alt="Netflix" />
       {user?.uid && (
-        <div className="flex h-12">
+        <div className="flex items-center gap-4">
           <UserAvatar />
 
           <button
             onClick={handleSignOut}
-            className="flex text-white bg-red-600 rounded ml-4 my-1 p-2"
+            className="flex justify-self-center text-white bg-red-600 rounded ml-4 my-1 p-2 "
           >
             Sign Out
           </button>
