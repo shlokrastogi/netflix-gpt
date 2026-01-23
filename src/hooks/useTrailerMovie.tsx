@@ -3,9 +3,15 @@ import { useDispatch } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addTrailerVideo } from "../utils/movieSlice";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../utils/appStore";
 
 const useTrailerMovie = (movieId: number) => {
   const dispatch = useDispatch();
+
+  const nowPlayingMovies = useSelector(
+    (store: RootState) => store.movies.nowPlayingMovies,
+  );
 
   //fetch trailer video
 
@@ -30,7 +36,7 @@ const useTrailerMovie = (movieId: number) => {
   };
 
   useEffect(() => {
-    getMainMovieVideo();
+    if (!nowPlayingMovies) getMainMovieVideo();
   }, []);
 };
 
