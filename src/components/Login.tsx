@@ -8,6 +8,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import Header from "./header";
+import { MOVIE_BACKGROUND_IMAGE } from "../utils/constants";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -70,7 +71,7 @@ const Login = () => {
     <div className="relative min-h-screen w-screen">
       <img
         className="absolute w-full h-full object-cover"
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/e393bb3f-261f-43d1-99bb-16a157885615/web/IN-en-20260105-TRIFECTA-perspective_2802b120-4b8c-44a5-8fb9-617a728f4ec6_small.jpg"
+        src={MOVIE_BACKGROUND_IMAGE}
         alt="background"
       />
 
