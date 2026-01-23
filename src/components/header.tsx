@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO } from "../utils/constants";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -47,16 +48,27 @@ const Header = () => {
     return () => unsuscribe();
   }, []);
 
+  const handleGptSearchClick = () => {
+    // Toggle GPT Search
+    dispatch(toggleGptSearchView());
+  };
+
   return (
-    <div className="z-20 flex flex-row absolute w-screen px-28 py-4 bg-gradient-to-b from-black justify-between">
+    <div className="z-20 flex flex-row absolute w-screen px-12 py-2 bg-gradient-to-b from-black justify-between">
       <img className="flex w-32" src={LOGO} alt="Netflix" />
       {user?.uid && (
         <div className="flex items-center gap-4">
+          <button
+            className="bg-white text-black font-bold m-4 p-2 rounded-md hover:bg-white/75"
+            onClick={handleGptSearchClick}
+          >
+            GPT Search
+          </button>
           <UserAvatar />
 
           <button
             onClick={handleSignOut}
-            className="flex justify-self-center text-white bg-red-600 rounded ml-4 my-1 p-2 "
+            className="flex justify-self-center text-white bg-red-600 rounded mr-2 my-1 p-2 px-8 hover:bg-red-800"
           >
             Sign Out
           </button>

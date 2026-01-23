@@ -6,7 +6,7 @@ import { RootState } from "../utils/appStore";
 const SecondaryContainer = () => {
   const movies = useSelector((store: RootState) => store.movies);
   return (
-    <div className="-mt-40 bg-black">
+    <div className="-mt-36 bg-black">
       {/* 
         Movie Lists - Popular
             MovieCards * n
