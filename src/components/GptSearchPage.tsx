@@ -5,17 +5,20 @@ import { MOVIE_BACKGROUND_IMAGE } from "../utils/constants";
 
 const GptSearch = () => {
   return (
-    <div className="relative min-h-screen w-screen">
+    <div className="relative min-h-screen w-screen overflow-x-hidden">
       <img
-        className="absolute w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover"
         src={MOVIE_BACKGROUND_IMAGE}
         alt="background"
       />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black"></div>
 
-      <GptSearchBar />
-      <GptMovieSuggestions />
+      {/* This wrapper fixes stacking issues */}
+      <div className="relative z-10">
+        <GptSearchBar />
+        <GptMovieSuggestions />
+      </div>
     </div>
   );
 };

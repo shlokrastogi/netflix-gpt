@@ -60,7 +60,7 @@ Example format: Inception, Interstellar, Oppenheimer, Sholay, Don
   };
 
   return (
-    <div className="absolute top-24 left-1/2 -translate-x-1/2 w-1/2">
+    <div className="absolute top-24 left-1/2 -translate-x-1/2 w-1/2 z-30">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -71,12 +71,12 @@ Example format: Inception, Interstellar, Oppenheimer, Sholay, Don
         <input
           ref={searchText}
           type="text"
-          className="w-full p-2 bg-slate-800 text-white rounded-md mr-2"
+          className="w-full p-2 bg-slate-800 text-white rounded-md mr-4"
           placeholder={lang[langKey as keyof typeof lang].gptSearchPlaceholder}
         />
         <button
           type="submit"
-          className="bg-red-600 text-white font-semibold p-2 px-4 rounded-md"
+          className="bg-red-600 text-white font-semibold p-2 px-4 rounded-md hover:bg-red-700"
         >
           {lang[langKey as keyof typeof lang].search}
         </button>
