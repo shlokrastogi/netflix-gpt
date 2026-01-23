@@ -27,6 +27,10 @@
 - Embedded the YouTube video and make it autoplay and mute
 - Tailwind Classes to make Main Container look Awesome
 - GPT Search Feature
+- GPT Search Page
+- GPT Search Bar
+- ⭐ Multi-Language Feature In the app
+- Integrate the GPT APIs
 
 # Features
 
