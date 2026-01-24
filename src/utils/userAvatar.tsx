@@ -18,7 +18,7 @@ const UserAvatar = () => {
 
   return (
     <div
-      className={`w-10 h-10 rounded flex items-center justify-center text-white font-bold ${randomGradient}`}
+      className={`w-8 h-8 rounded flex items-center justify-center text-white font-bold ${randomGradient}`}
     >
       {user?.photoURL || user?.displayName?.[0] || "U"}
     </div>

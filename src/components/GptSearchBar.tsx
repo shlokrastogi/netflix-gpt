@@ -60,7 +60,7 @@ Example format: Inception, Interstellar, Oppenheimer, Sholay, Don
   };
 
   return (
-    <div className="absolute top-24 left-1/2 -translate-x-1/2 w-1/2 z-30">
+    <div className="absolute top-24 left-1/2 -translate-x-1/2 w-full px-2 mt-8 z-30  sm:w-1/2">
       <form
         onSubmit={(e) => {
           e.preventDefault();

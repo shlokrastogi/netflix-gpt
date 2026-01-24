@@ -9,8 +9,8 @@ import { RootState } from "../utils/appStore";
 const useTrailerMovie = (movieId: number) => {
   const dispatch = useDispatch();
 
-  const nowPlayingMovies = useSelector(
-    (store: RootState) => store.movies.nowPlayingMovies,
+  const trailerVideo = useSelector(
+    (store: RootState) => store.movies.trailerVideo,
   );
 
   //fetch trailer video
@@ -36,7 +36,7 @@ const useTrailerMovie = (movieId: number) => {
   };
 
   useEffect(() => {
-    if (!nowPlayingMovies) getMainMovieVideo();
+    if (!trailerVideo) getMainMovieVideo();
   }, []);
 };
 

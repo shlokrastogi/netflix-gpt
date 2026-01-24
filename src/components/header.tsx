@@ -63,45 +63,55 @@ const Header = () => {
   };
 
   return (
-    <div className="z-20 flex flex-row absolute w-screen px-12 py-2 bg-gradient-to-b from-black justify-between">
-      <img className="flex w-32 h-10 mt-2" src={LOGO} alt="Netflix" />
+    <div className="fixed top-0 left-0 z-50 w-full sm:bg-gradient-to-b from-black px-4 sm:px-8 py-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        {/* Logo */}
+        <img className="w-28 sm:w-32 h-auto" src={LOGO} alt="Netflix" />
 
-      {user?.uid && (
-        <div className="flex items-center gap-4">
-          {showGptSearch && (
-            <select
-              className="bg-transparent p-1 text-white text-sm rounded border border-white"
-              onChange={handleLanguageChange}
+        {user?.uid && (
+          <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-3">
+            {/* Language selector */}
+            {showGptSearch && (
+              <select
+                className="bg-transparent text-white text-sm  px-2 py-1 rounded border border-white"
+                onChange={handleLanguageChange}
+              >
+                {SUPPORTED_LANGUAGES.map((lang) => (
+                  <option
+                    className="bg-slate-900 text-sm"
+                    key={lang.identifier}
+                    value={lang.identifier}
+                  >
+                    {lang.name}
+                  </option>
+                ))}
+              </select>
+            )}
+
+            {/* GPT Toggle */}
+
+            <button
+              className="bg-white text-black font-semibold px-3 py-1.5 rounded hover:bg-white/80 text-sm"
+              onClick={handleGptSearchClick}
             >
-              {SUPPORTED_LANGUAGES.map((lang) => (
-                <option
-                  className="bg-slate-900"
-                  key={lang.identifier}
-                  value={lang.identifier}
-                >
-                  {lang.name}
-                </option>
-              ))}
-            </select>
-          )}
+              {showGptSearch ? "Home" : "GPT Search"}
+            </button>
 
-          <button
-            className="bg-white text-black font-bold m-4 p-2 rounded-md hover:bg-white/75"
-            onClick={handleGptSearchClick}
-          >
-            {showGptSearch ? "Home Page" : "GPT Search"}
-          </button>
+            <div className="flex-1"></div>
 
-          <UserAvatar />
+            {/* Avatar */}
+            <UserAvatar />
 
-          <button
-            onClick={handleSignOut}
-            className="flex font-bold justify-self-center text-white bg-red-600 rounded mr-2 my-1 p-2 px-8 hover:bg-red-800"
-          >
-            Sign Out
-          </button>
-        </div>
-      )}
+            {/* Sign out */}
+            <button
+              onClick={handleSignOut}
+              className="bg-red-600 text-white font-semibold px-4 py-1.5 rounded hover:bg-red-800 text-sm"
+            >
+              Sign Out
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
