@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import appStore from "../utils/appStore";
 import VideoTitle from "./VideoTitle";
 import VideoBackground from "./VideoBackground";
 

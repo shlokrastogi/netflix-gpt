@@ -1,9 +1,7 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addTrailerVideo } from "../utils/movieSlice";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useCallback } from "react";
 import { RootState } from "../utils/appStore";
 
 const useTrailerMovie = (movieId: number) => {
@@ -13,31 +11,28 @@ const useTrailerMovie = (movieId: number) => {
     (store: RootState) => store.movies.trailerVideo,
   );
 
-  //fetch trailer video
-
-  const getMainMovieVideo = async () => {
+  const getMainMovieVideo = useCallback(async () => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/movie/" +
-        movieId +
-        "/videos?language=en-US",
+      `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
       API_OPTIONS,
     );
+
     const json = await data.json();
-    // console.log(json);
 
     const trailers = json.results?.filter(
       (video: any) => video.type === "Trailer",
     );
 
-    const trailer = trailers.length != 0 ? trailers[0] : json.results?.[0];
+    const trailer = trailers?.length !== 0 ? trailers?.[0] : json.results?.[0];
 
-    // console.log(trailer);
     dispatch(addTrailerVideo(trailer));
-  };
+  }, [movieId, dispatch]);
 
   useEffect(() => {
-    if (!trailerVideo) getMainMovieVideo();
-  }, [getMainMovieVideo]);
+    if (!trailerVideo) {
+      getMainMovieVideo();
+    }
+  }, [trailerVideo, getMainMovieVideo]);
 };
 
 export default useTrailerMovie;
